@@ -17,7 +17,7 @@ void main(){
     char string[MAX];
     int i;
 
-    printf("\nDFA accepting strings that contains 'aba' as substring");
+    printf("\nDFA accepting strings that contains '011' as substring");
     printf("\nInput symbols: (0,1)");
 
     printf("\nEnter a string: ");
