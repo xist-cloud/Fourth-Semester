@@ -16,8 +16,8 @@ void main(){
     char string[MAX];
     int i;
 
-    printf("\nDFA accepting strings that does not end with 'ab'");
-    printf("\nInput symbols: (a,b)");
+    printf("\nDFA accepting strings that end with '00'");
+    printf("\nInput symbols: (0,1)");
 
     printf("\nEnter a string: ");
     scanf("%s", string);
@@ -38,7 +38,7 @@ void main(){
     }
 
     //check if current state is final state or not
-    if(state == 'A' || state == 'B'){
+    if(state == 'C'){
         printf("\nString is accepted.");
     }
     else{
@@ -48,15 +48,16 @@ void main(){
 
 
 //state transitions
+// c is character of input string
 void A(char c){
-    if(c == 'a') state = 'B';
+    if(c == '0') state = 'B';
 }
 
 void B(char c){
-    if(c == 'b') state = 'C';
+    if(c == '0') state = 'C';
+    else if(c == '1') state = 'A';
 }
 
 void C(char c){
-    if(c == 'a') state = 'B';
-    else if(c == 'b') state = 'A';
+    if(c == '1') state = 'A';
 }

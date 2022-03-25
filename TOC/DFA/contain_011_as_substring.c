@@ -7,6 +7,7 @@
 void A(char);
 void B(char);
 void C(char);
+void D(char);
 
 //initial state
 char state = 'A';
@@ -16,8 +17,8 @@ void main(){
     char string[MAX];
     int i;
 
-    printf("\nDFA accepting strings that does not end with 'ab'");
-    printf("\nInput symbols: (a,b)");
+    printf("\nDFA accepting strings that contains 'aba' as substring");
+    printf("\nInput symbols: (0,1)");
 
     printf("\nEnter a string: ");
     scanf("%s", string);
@@ -34,11 +35,14 @@ void main(){
             case 'C':
                 C(string[i]);
                 break;
+            case 'D':
+                D(string[i]);
+                break;
         }
     }
 
     //check if current state is final state or not
-    if(state == 'A' || state == 'B'){
+    if(state == 'D'){
         printf("\nString is accepted.");
     }
     else{
@@ -49,14 +53,18 @@ void main(){
 
 //state transitions
 void A(char c){
-    if(c == 'a') state = 'B';
+    if(c == '0') state = 'B';
 }
 
 void B(char c){
-    if(c == 'b') state = 'C';
+    if(c == '1') state = 'C';
 }
 
 void C(char c){
-    if(c == 'a') state = 'B';
-    else if(c == 'b') state = 'A';
+    if(c == '1') state = 'D';
+    else if(c == '0') state = 'B';
+}
+
+void D(char c){
+    return;
 }
