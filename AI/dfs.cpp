@@ -2,63 +2,66 @@
 
 using namespace std;
 
-class Queue
+class Stack
 {
 private:
-    int front, rear, size;
-    int *queue;
+    int top, size;
+    int *stack;
 
 public:
-    Queue(int size);
-    ~Queue();
-
-    void Enqueue(int x);
-    int Dequeue(void);
-    bool isFull();
-    bool isEmpty();
+    Stack(int size);
+    ~Stack();
+    void push(int x);
+    int pop(void);
+    bool isFull(void);
+    bool isEmpty(void);
 };
 
-Queue::Queue(int size = 10)
+Stack::Stack(int size)
 {
-    this->front = -1;
-    this->rear = -1;
+    this->top = -1;
     this->size = size;
-    this->queue = new int[this->size];
+    this->stack = new int[size];
 }
 
-Queue::~Queue()
+Stack::~Stack()
 {
-    delete[] this->queue;
+    delete[] this->stack;
 }
 
-bool Queue::isEmpty()
+bool Stack::isFull()
 {
-    return (this->front == this->rear);
-}
-bool Queue::isFull()
-{
-    return (this->front == this->size - 1);
+    return (this->top == size - 1);
 }
 
-void Queue::Enqueue(int x)
+bool Stack::isEmpty()
+{
+    return (this->top == -1);
+}
+
+void Stack::push(int x)
 {
     if (isFull())
-        return;
-    this->front++;
-    this->queue[this->front] = x;
-}
-
-int Queue::Dequeue()
-{
-    if (!isEmpty())
     {
-        this->rear++;
-        return this->queue[rear];
+        return;
     }
-    return -1;
+    this->top++;
+    this->stack[this->top] = x;
 }
 
-int main(void)
+int Stack::pop()
+{
+    if (isEmpty())
+        return -1;
+    else
+    {
+        int temp = this->stack[this->top];
+        this->top--;
+        return temp;
+    }
+}
+
+int main()
 {
     int vertices;
     // Vertices
@@ -66,7 +69,7 @@ int main(void)
     cin >> vertices;
 
     // Create Queue
-    Queue *q = new Queue(2 * vertices);
+    Stack *s = new Stack(2 * vertices);
 
     // Visited List
     bool visited[vertices];
@@ -87,22 +90,20 @@ int main(void)
     cout << "Enter start node: ";
     cin >> startNode;
 
-    // Breadth First Search
-    int currentNode;
-    currentNode = startNode;
-    q->Enqueue(startNode);
-    while (!q->isEmpty())
+    // Depth First Search
+    int currentNode = startNode;
+    s->push(currentNode);
+    while (!s->isEmpty())
     {
-        currentNode = q->Dequeue();
+        currentNode = s->pop();
         cout << currentNode;
         visited[currentNode] = true;
-
         for (int i = 0; i < vertices; i++)
         {
             if ((adjMat[currentNode][i] == 1) && (!visited[i]))
             {
                 visited[i] = true;
-                q->Enqueue(i);
+                s->push(i);
             }
         }
     }
