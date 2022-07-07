@@ -43,15 +43,12 @@ int main()
         }
         current = next;
     }
-    for (itr = current.begin(); itr != current.end(); itr++)
+    for (itr = final.begin(); itr != final.end(); itr++)
     {
-        for (itr2 = final.begin(); itr2 != final.end(); itr2++)
+        if (current.count(*itr) == 1)
         {
-            if (*itr == *itr2)
-            {
-                cout << "Accepted";
-                exit(0);
-            }
+            cout << "Accepted";
+            exit(0);
         }
     }
     cout << "Rejected";
