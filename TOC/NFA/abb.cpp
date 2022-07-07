@@ -9,7 +9,7 @@ int main()
     set<int> final = {3};
     set<int> current = {0};
     set<int> next;
-    set<int>::iterator itr, itr2;
+    set<int>::iterator itr;
 
     int transition[2][4][4] = {{{1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 1}},
                                {{1, 0, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}, {0, 0, 1, 1}}};
